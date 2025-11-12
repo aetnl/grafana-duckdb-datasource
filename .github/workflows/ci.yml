@@ -178,16 +178,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: all-artifacts
-
       - name: Prepare dist directory
         run: |
           mkdir -p dist
           cp -r all-artifacts/*/gpx_duckdb_datasource* dist/
-
-      - uses: magefile/mage-action@v3
+      - name: Build GenerateManifestFile
+        uses: magefile/mage-action@v3
         with:
           version: latest
           args: -v build:GenerateManifestFile
+          cache-binary: false
       - name: Upload final artifacts with manifest
         uses: actions/upload-artifact@v4
         with:
