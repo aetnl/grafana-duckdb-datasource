@@ -3,7 +3,7 @@ on: [pull_request]
 
 jobs:
   compatibilitycheck:
-    runs-on: linux-arm64-runner
+    runs-on: ubuntu-22.04-arm
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js environment

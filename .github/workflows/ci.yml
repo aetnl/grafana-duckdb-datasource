@@ -37,7 +37,7 @@ jobs:
   #         retention-days: 5
 
   build-linux-arm64:
-    runs-on: linux-arm64-runner
+    runs-on: ubuntu-22.04-arm
     steps:
       - uses: actions/checkout@v4
         with:
@@ -166,7 +166,7 @@ jobs:
       # build-macos-amd64, 
       # build-windows
     ]
-    runs-on: linux-arm64-runner
+    runs-on: ubuntu-22.04-arm
     steps:
       - uses: actions/checkout@v4
         with:
@@ -197,7 +197,7 @@ jobs:
 
   build:
     name: Build, lint and unit tests
-    runs-on: linux-arm64-runner
+    runs-on: ubuntu-22.04-arm
     needs: generate-manifest
     outputs:
       plugin-id: ${{ steps.metadata.outputs.plugin-id }}
@@ -295,7 +295,7 @@ jobs:
 
   resolve-versions:
     name: Resolve e2e images
-    runs-on: linux-arm64-runner
+    runs-on: ubuntu-22.04-arm
     timeout-minutes: 3
     needs: build
     if: ${{ needs.build.outputs.has-e2e == 'true' }}
@@ -316,7 +316,7 @@ jobs:
       matrix:
         GRAFANA_IMAGE: ${{fromJson(needs.resolve-versions.outputs.matrix)}}
     name: e2e test ${{ matrix.GRAFANA_IMAGE.name }}@${{ matrix.GRAFANA_IMAGE.VERSION }}
-    runs-on: linux-arm64-runner
+    runs-on: ubuntu-22.04-arm
     steps:
       - uses: actions/checkout@v4
 
